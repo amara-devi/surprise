@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Surprise</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #59effa, #fa418e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .page {
+            display: none;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        /* Page 1 */
+        .start-btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            background: #fff;
+            color: #ff4f7b;
+            cursor: pointer;
+        }
+
+        /* Card */
+        .card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 500px;
+        }
+
+        .emoji {
+            font-size: 60px;
+        }
+
+        .card h2 {
+            margin: 20px 0;
+            color: #ff4f7b;
+        }
+
+        .btn-group {
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .yes {
+            background: #ff4f7b;
+            color: #fff;
+        }
+
+        .no {
+            background: #ddd;
+            color: #333;
+            position: absolute;
+        }
+
+        /* Final page */
+        .final {
+            flex-direction: column;
+            color: #fff;
+        }
+
+        .final img {
+            width: 200px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .final h1 {
+            color: #7bc7ea;
+            font-size: 32px;
+        }
+
+        /* Flower animation */
+        .flower {
+            position: absolute;
+            top: -50px;
+            font-size: 24px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Page 1 -->
+<div class="page active" id="page1">
+    <div class="card">
+        <h1>haii!! mama,very good morning</h1>
+        <h2>please click the below button to experience the surprise😁</h2>
+    <button class="start-btn" onclick="goToPage(2)" style="background-color:antiquewhite">Click Here 💌</button>
+    </div>
+</div>
+
+<!-- Page 2 -->
+<div class="page" id="page2">
+    <div class="card">
+        <div class="emoji">🥰</div>
+        <h2>Will you be my Valentine?</h2>
+        <div class="btn-group">
+            <button class="btn yes" onclick="goToPage(3)">Yes😍</button>
+            <button class="btn no" id="noBtn">No🥺</button>
+        </div>
+         <h2>No,button shy feel avutundi.danini nuvvu touch cheyyalev😂</h2>
+    </div>
+</div>
+
+<!-- Page 3 -->
+<div class="page final" id="page3">
+    <div class="card">
+     <div class="emoji">😍</div>
+    <h1>Thank you for choosing me,mama 💖</h1>
+    <h2>manam appudu elane fight cheskuntu😂,love cheskuntu😍,care cheskuntu🥰,romance cheskuntu 💖vundali ani korukuntunna mama</h2>
+    <h1>signing off by ne mamuu</h1>
+    </div>
+</div>
+
+<script>
+    function goToPage(pageNo) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page' + pageNo).classList.add('active');
+
+        if (pageNo === 3) {
+            createFlowers();
+        }
+    }
+
+    // Move NO button
+    const noBtn = document.getElementById('noBtn');
+    noBtn.addEventListener('mouseover', () => {
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 100 - 50;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Flower animation
+    function createFlowers() {
+        setInterval(() => {
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            flower.innerHTML = '🌸';
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(flower);
+
+            setTimeout(() => flower.remove(), 5000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
